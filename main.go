@@ -32,6 +32,8 @@ func earthquakeHandler(w http.ResponseWriter, r *http.Request) {
 
 	shakeMapURL := "https://data.bmkg.go.id/DataMKG/TEWS/" + bmkgResp.Infogempa.Gempa["Shakemap"]
 	bmkgResp.Infogempa.Gempa["Shakemap"] = shakeMapURL
+
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
 	// Kembalikan informasi gempa dalam format JSON
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(bmkgResp.Infogempa.Gempa)
